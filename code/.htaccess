@@ -1,0 +1,66 @@
+<Files ~ "\.(xml.php)$">
+  order allow,deny
+  deny from all
+</Files>
+
+RewriteEngine On
+
+RewriteBase /
+
+RewriteRule login/?$ index.php?do=home.showLoginForm [L]
+RewriteRule administrator/?$ index.php?do=admin.main [L]
+RewriteRule ^sitemap.xml/?$ index.php?do=util.sitemap [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*htm$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*html$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*jpg$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*jpeg$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*gif$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*png$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*css$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*js$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*swf$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*ico$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} ^.*tiny_mce_gzip\.php$ [NC]
+RewriteRule ^(.*)$	$1 [L]
+
+# RewriteCond %{REQUEST_FILENAME} ^.*\.page$ [NC]
+RewriteRule ^([^/]+)/([^/]+)\.page$ index.php?do=home.showArticle&language=$1&article=$2 [L]
+
+# RewriteCond %{REQUEST_FILENAME} ^.*\.comments$ [NC]
+RewriteRule ^([^/]+)/([^/]+)\.comments$ index.php?do=home.showArticleComments&language=$1&article=$2 [L] 
+
+# RewriteCond %{REQUEST_FILENAME} ^.*\.gallery$ [NC]
+# RewriteCond %{REQUEST_FILENAME} ^.*\.gallery\/*$ [NC]
+RewriteRule ^([^/]+)/([^/]+)\.gallery$ index.php?do=home.showGallery&language=$1&gallery=$2 [L]
+RewriteRule ^([^/]+)/([^/]+)\.gallery\/([^/]+)$ index.php?do=home.showGallery&language=$1&gallery=$2&page=$3 [L]
+
+# RewriteCond %{REQUEST_FILENAME} ^.*\.image$ [NC]
+RewriteRule ^([^/]+)/([^/]+)\.([^/]+)\.image$ index.php?do=home.showGalleryImage&language=$1&gallery=$2&image=$3 [L]
+
+# RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/([^/]+)/([^/]*)/?$ index.php?language=$1&do=$2.$3 [L]
+
+RewriteRule ^([^/]+)/([^/]+)/([^/]*)/&([^/]+)$ index.php?language=$1&do=$2.$3&$4 [L]
+RewriteRule ^([^/]+)/([^/]+)/([^/]*)/([^/]*)/?$ index.php?language=$1&do=$2.$3&key=$4 [L]
+RewriteRule ^([^/]+)/([^/]+)/([^/]*)/([a-zA-Z0-9_]*)/([^/]*)$ index.php?language=$1&do=$2.$3&key=$4$5 [L]
